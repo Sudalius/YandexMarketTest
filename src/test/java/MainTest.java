@@ -5,15 +5,15 @@ import steps.MainSteps;
 
 public class MainTest {
 
-    MainSteps mainSteps = new MainSteps();
-
     @BeforeTest
     public void beforeTest() {
         Configuration.timeout = 6000;
+        Configuration.browser = "chrome";
     }
 
     @Test
     public void mainTest() {
+        MainSteps mainSteps = new MainSteps();
         mainSteps.openYandex()
                 .clickMarket()
                 .chooseElectronic()

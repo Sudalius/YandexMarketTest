@@ -7,5 +7,4 @@ public class BaseStep {
     public void yandexOpen(){
         Selenide.open("http://www.yandex.ru");
     }
-
 }

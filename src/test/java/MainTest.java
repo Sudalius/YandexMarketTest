@@ -5,15 +5,17 @@ import steps.MainSteps;
 
 public class MainTest {
 
-    MainSteps mainSteps = new MainSteps();
-
     @BeforeTest
     public void beforeTest() {
         Configuration.timeout = 6000;
+        System.setProperty("webdriver.chrome.driver", "../YMtest/driver/chromedriver");
+        Configuration.browser = "chrome";
     }
 
     @Test
     public void mainTest() {
+        MainSteps mainSteps = new MainSteps();
+
         mainSteps.openYandex()
                 .clickMarket()
                 .chooseElectronic()

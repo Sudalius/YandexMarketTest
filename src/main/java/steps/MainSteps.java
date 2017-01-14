@@ -9,7 +9,7 @@ public class MainSteps extends BaseStep {
 
     YandexPage yandexPage = null;
 
-    public MainSteps(){
+    public MainSteps() {
         yandexPage = Selenide.page(YandexPage.class);
     }
 

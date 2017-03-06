@@ -1,9 +1,8 @@
-package steps;
+package com.sudyarov.steps;
 
 import com.codeborne.selenide.Selenide;
-import pages.YandexPage;
+import com.sudyarov.pages.YandexPage;
 import ru.yandex.qatools.allure.annotations.Step;
-
 
 public class MainSteps extends BaseStep {
 

@@ -1,26 +1,28 @@
-import com.codeborne.selenide.Configuration;
+import com.sudyarov.properties.Config;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import steps.MainSteps;
+import com.sudyarov.steps.BaseStep;
+import com.sudyarov.steps.MainSteps;
+import java.io.IOException;
 
 public class MainTest {
 
     @BeforeTest
     public void beforeTest() {
-        Configuration.timeout = 6000;
-        System.setProperty("webdriver.chrome.driver", "../YMtest/driver/chromedriver");
-        Configuration.browser = "chrome";
+        BaseStep.beforeTest();
     }
 
     @Test
-    public void mainTest() {
+    public void mainTest() throws IOException {
+
         MainSteps mainSteps = new MainSteps();
+        Config config = new Config();
 
         mainSteps.openYandex()
                 .clickMarket()
                 .chooseElectronic()
                 .chooseTV()
-                .setPriceFrom("20000")
+                .setPriceFrom(config.loadTvPrice("tvPrice"))
                 .checkSamsungAndLg().clickApplyButton()
                 .check12ElementsOnPage()
                 .storeFirstElement()

@@ -42,9 +42,9 @@ public class YandexPage {
     }
 
     public void markSamsungAndLg() {
-        checkBoxes.get(5).click();
+        checkBoxes.get(6).click();
         Selenide.sleep(1000);
-        checkBoxes.get(9).click();
+        checkBoxes.get(10).click();
     }
 
     public void clickApplyButton(){

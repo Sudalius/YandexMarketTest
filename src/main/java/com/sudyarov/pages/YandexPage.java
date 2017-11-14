@@ -20,7 +20,7 @@ public class YandexPage {
     @FindBy(className = "n-filter-panel-aside__apply") SelenideElement applyButton;
     @FindBy(className = "checkbox__label") ElementsCollection checkBoxes;
     @FindBy(id = "header-search") SelenideElement searchField;
-    @FindBy(className = "snippet-card__header-text") ElementsCollection quantityOfElements;
+    @FindBy(className = "n-snippet-card2__title") ElementsCollection quantityOfElements;
     @FindBy(className = "n-title__text") SelenideElement searchResult;
 
     // METHODS
@@ -42,9 +42,9 @@ public class YandexPage {
     }
 
     public void markSamsungAndLg() {
-        checkBoxes.get(6).click();
+        checkBoxes.get(8).click();
         Selenide.sleep(1000);
-        checkBoxes.get(10).click();
+        checkBoxes.get(11).click();
     }
 
     public void clickApplyButton(){

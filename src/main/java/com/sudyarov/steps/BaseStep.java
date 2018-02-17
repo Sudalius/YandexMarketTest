@@ -5,13 +5,13 @@ import com.codeborne.selenide.Selenide;
 
 public class BaseStep {
 
-    public void yandexOpen(){
+    void yandexOpen(){
         Selenide.open("http://www.yandex.ru");
     }
 
     public static void beforeTest() {
         Configuration.timeout = 6000;
-        System.setProperty("webdriver.chrome.driver", "../YMtest/driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
         Configuration.browser = "chrome";
     }
 }

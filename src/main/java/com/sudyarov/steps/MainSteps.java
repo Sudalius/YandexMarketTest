@@ -3,12 +3,14 @@ package com.sudyarov.steps;
 import com.codeborne.selenide.Selenide;
 import com.sudyarov.pages.YandexPage;
 import ru.yandex.qatools.allure.annotations.Step;
+import java.io.IOException;
 
 public class MainSteps extends BaseStep {
 
-    YandexPage yandexPage = null;
+    private YandexPage yandexPage = null;
 
-    public MainSteps() {
+    public MainSteps() throws IOException {
+        super();
         yandexPage = Selenide.page(YandexPage.class);
     }
 
@@ -48,15 +50,10 @@ public class MainSteps extends BaseStep {
         return this;
     }
 
-    @Step("Click Apply button")
-    public MainSteps clickApplyButton() {
-        yandexPage.clickApplyButton();
-        return this;
-    }
 
     @Step("Check 12 elements on page")
-    public MainSteps check12ElementsOnPage() {
-        yandexPage.check12ElementsOnPage();
+    public MainSteps check48ElementsOnPage() {
+        yandexPage.check48ElementsOnPage();
         return this;
     }
 

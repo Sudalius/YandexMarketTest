@@ -4,26 +4,22 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 public class YandexPage {
 
-    // FIELDS
-
-    @FindBy(linkText = "Маркет") SelenideElement market;
-    @FindBy(linkText = "Электроника") SelenideElement electronic;
-    @FindBy(linkText = "Телевизоры") SelenideElement tv;
-    @FindBy(id = "glf-pricefrom-var") SelenideElement priceFromField;
-    @FindBy(className = "n-filter-panel-aside__apply") SelenideElement applyButton;
-    @FindBy(className = "checkbox__label") ElementsCollection checkBoxes;
-    @FindBy(id = "header-search") SelenideElement searchField;
-    @FindBy(className = "n-snippet-card2__title") ElementsCollection quantityOfElements;
-    @FindBy(className = "n-title__text") SelenideElement searchResult;
-
-    // METHODS
+    @FindBy(linkText = "Маркет") private SelenideElement market;
+    @FindBy(linkText = "Электроника") private SelenideElement electronic;
+    @FindBy(linkText = "Телевизоры") private SelenideElement tv;
+    @FindBy(id = "glpricefrom") private WebElement priceFromField;
+    @FindBy(xpath = "//span[@data-reactid = '129']") private SelenideElement samsung;
+    @FindBy(xpath = "//span[@data-reactid = '101']")  private SelenideElement LG;
+    @FindBy(id = "header-search") private SelenideElement searchField;
+    @FindBy(className = "n-snippet-card2__title") private ElementsCollection quantityOfElements;
+    @FindBy(className = "n-title__text") private SelenideElement searchResult;
 
     public void clickMarket() {
         market.shouldBe(Condition.appear).click();
@@ -38,22 +34,17 @@ public class YandexPage {
     }
 
     public void setPriceFrom(String price) {
-        priceFromField.setValue(price);
+        priceFromField.sendKeys(price);
     }
 
     public void markSamsungAndLg() {
-        checkBoxes.get(8).click();
-        Selenide.sleep(1000);
-        checkBoxes.get(11).click();
+        LG.scrollTo();
+        samsung.click();
+        LG.click();
     }
 
-    public void clickApplyButton(){
-        applyButton.shouldBe(Condition.appear).click();
-        Selenide.sleep(3000);
-    }
-
-    public void check12ElementsOnPage() {
-        Assert.assertEquals(quantityOfElements.size(), 12);
+    public void check48ElementsOnPage() {
+        Assert.assertEquals(quantityOfElements.size(), 48);
     }
 
     public String storeFirstElement() {
@@ -68,7 +59,7 @@ public class YandexPage {
         searchField.sendKeys(Keys.ENTER);
 
         Selenide.sleep(2000);
-        Assert.assertEquals(searchResult.getText(), firstFoundElement);
+        Assert.assertTrue(searchResult.getText().contains(firstFoundElement));
 
         System.out.println("Element in memory is equals to: " + firstFoundElement);
         System.out.println("Element in search result is equals to: " + searchResult);

@@ -1,4 +1,6 @@
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import com.sudyarov.steps.BaseStep;
@@ -13,23 +15,25 @@ public class MainTest {
 
     @BeforeTest
     public void beforeTest() throws IOException {
-        BaseStep.beforeTest("chrome");  // use "firefox" in this field to execute test in Firefox browser
-        mainSteps = new MainSteps();               // but pay attention: geckodriver for Firefox currently unstable
+        WebDriverManager.chromedriver().setup();
         props = BaseStep.loadProperties();
+        mainSteps = new MainSteps();
     }
-
 
     @Test
     public void mainTest() {
-
-        mainSteps.openYandex()
-                .clickMarket()
-                .chooseElectronic()
-                .chooseTV()
+        mainSteps.openYandexMarket(props.getProperty("baseURL"))
+                .chooseComputers()
+                .chooseLaptops()
                 .setPriceFrom(props.getProperty("priceFrom"))
-                .checkSamsungAndLg()
-                .check48ElementsOnPage()
+                .markAppleAndMicrosoft()
+                .checkFoundedTitlesQuantityOnPage(48)
                 .storeFirstElement()
-                .searchAndAssert();
+                .putElementAndCheckSearchResult();
+    }
+
+    @AfterTest
+    public void afterTest() {
+        BaseStep.driver.close();
     }
 }

@@ -1,59 +1,57 @@
 package com.sudyarov.steps;
 
-import com.codeborne.selenide.Selenide;
+
 import com.sudyarov.pages.YandexPage;
+import org.openqa.selenium.support.PageFactory;
 import ru.yandex.qatools.allure.annotations.Step;
-import java.io.IOException;
 
-public class MainSteps extends BaseStep {
+public class MainSteps extends BaseStep{
 
-    private YandexPage yandexPage = null;
+    private YandexPage yandexPage;
 
-    public MainSteps() throws IOException {
-        super();
-        yandexPage = Selenide.page(YandexPage.class);
+    public MainSteps() {
+        yandexPage = PageFactory.initElements(driver, YandexPage.class);
+        driver.manage().window().maximize();
     }
 
-    @Step("Open Yandex")
-    public MainSteps openYandex() {
-        super.yandexOpen();
+    @Step("Open Yandex market")
+    public MainSteps openYandexMarket(String url) {
+        driver.get(url);
         return this;
     }
 
-    @Step("Choose market")
-    public MainSteps clickMarket() {
-        yandexPage.clickMarket();
+    @Step("Choose computers")
+    public MainSteps chooseComputers() {
+        yandexPage.clickComputers();
         return this;
     }
 
-    @Step("Choose electronic")
-    public MainSteps chooseElectronic() {
-        yandexPage.clickElectronic();
-        return this;
-    }
-
-    @Step("Choose TV")
-    public MainSteps chooseTV() {
-        yandexPage.clickTv();
+    @Step("Choose Laptops")
+    public MainSteps chooseLaptops() {
+        yandexPage.clickLaptops();
         return this;
     }
 
     @Step("Set price from")
     public MainSteps setPriceFrom(String price) {
         yandexPage.setPriceFrom(price);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 
-    @Step("Check Samsing & LG")
-    public MainSteps checkSamsungAndLg() {
-        yandexPage.markSamsungAndLg();
+    @Step("Check Apple and Microsoft")
+    public MainSteps markAppleAndMicrosoft() {
+        yandexPage.markAppleAndMicrosoft(driver);
         return this;
     }
 
-
-    @Step("Check 12 elements on page")
-    public MainSteps check48ElementsOnPage() {
-        yandexPage.check48ElementsOnPage();
+    @Step("Check founded titles quantity on page")
+    public MainSteps checkFoundedTitlesQuantityOnPage(int expectedQuantity) {
+        yandexPage.checkFoundedTitlesQuantity(expectedQuantity);
         return this;
     }
 
@@ -63,9 +61,9 @@ public class MainSteps extends BaseStep {
         return this;
     }
 
-    @Step("Put first element to search field and assert it with search result")
-    public MainSteps searchAndAssert() {
-        yandexPage.searchAndAssert();
+    @Step("Put first element to the search field and check it availability in search result")
+    public MainSteps putElementAndCheckSearchResult() {
+        yandexPage.searchAndAssert(driver);
         return this;
     }
 }

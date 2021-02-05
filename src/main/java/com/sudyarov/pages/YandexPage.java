@@ -13,7 +13,7 @@ import java.util.List;
 public class YandexPage {
     @FindBy(xpath = "//span[contains(@class,'_3z8GfB4w3a')and text()='Компьютеры']")
     private WebElement computers;
-    @FindBy(xpath = "//*[@href='/catalog--noutbuki/54544/list?hid=91013']")
+    @FindBy(xpath = "//a[contains(@href, 'catalog--noutbuki') and contains(@href, '54544')]")
     private WebElement laptops;
     @FindBy(xpath = "//*[@data-range-input-type='from']//*[@id='glpricefrom']")
     private WebElement priceFromField;
@@ -25,8 +25,12 @@ public class YandexPage {
     private WebElement searchField;
     @FindBy(xpath = "//*[@data-zone-name='title']")
     private List<WebElement> quantityOfTitleElements;
+    @FindBy(xpath = "//*[contains(@class, '_2NFZmOqZwM')]//*[@data-tid='42de86b']")
+    private WebElement gotItYellowButton;
+
 
     public void clickComputers() {
+        gotItYellowButton.click();
         computers.click();
     }
 
